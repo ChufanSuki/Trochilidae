@@ -3,23 +3,23 @@ from .models import Car_User, Car_Model, Riding_Info, Riding_His_Info, Car_Check
 
 @admin.register(Car_User)
 class Car_UserAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('user', 'carModel', 'date', 'mac', 'state')
 
 @admin.register(Car_Model)
 class Car_ModelAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('name', 'code', 'state', 'img')
 
 @admin.register(Riding_Info)
 class Riding_InfoAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('user', 'state', 'startDate', 'endDate')
 
 @admin.register(Riding_His_Info)
 class Riding_His_InfoAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('riding', )
 
 @admin.register(Car_Check)
 class Car_CheckAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('car', 'type', 'date', 'result')
 
 @admin.register(Startup_Img)
 class Startup_ImgAdmin(admin.ModelAdmin):
@@ -27,15 +27,15 @@ class Startup_ImgAdmin(admin.ModelAdmin):
 
 @admin.register(Riding_Statistics)
 class Riding_StatisticsAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('car', 'duration', 'date', 'max_speed', 'average_speed')
 
 @admin.register(Sms_Codes)
 class Sms_CodesAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('phone_number', 'code', 'send_date', 'status')
 
 @admin.register(System_Config)
 class System_ConfigAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('name', 'value', 'express', 'type', 'note', 'status')
 
 # admin.site.register(Car_User)
 # admin.site.register(Car_Model)

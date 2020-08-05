@@ -18,23 +18,24 @@ class Car_Model(models.Model):
 
 class Car_User(models.Model):
     """Model representing the a instance of car model."""
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    carModel = models.OneToOneField(Car_Model, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    carModel = models.ForeignKey(Car_Model, on_delete=models.CASCADE)
     date = models.DateField(auto_now=True)
     mac = models.CharField(max_length=50)
     state = models.IntegerField()
+
 
     class Meta:
         ordering = ['date', 'id']
 
     def __str__(self):
-        return self.user.username
+        return f'{self.user.username}, Model ({self.carModel.name}), Mac code ({self.mac})'
     
     def get_absolute_url(self):
         return reverse('car-user', args=[str(self.id)])
 
 class Riding_Info(models.Model):
-    car = models.ForeignKey(Car_User, on_delete=models.CASCADE)
+    user = models.ForeignKey(Car_User, on_delete=models.CASCADE)
     startDate = models.DateTimeField(auto_now_add=True)
     endDate = models.DateTimeField()
     speed = models.CharField(max_length=50)
@@ -61,7 +62,7 @@ class Riding_Info(models.Model):
         ordering = ['startDate', 'endDate']
     
     def __str__(self):
-        return '%d %s' % (self.id, self.car.user.username)
+        return f'{self.id} {self.user.user.username} ({self.user.carModel}) Mac ({self.user.mac}) ({self.startDate}~{self.endDate})'
 
 class Riding_His_Info(models.Model):
     riding = models.OneToOneField(Riding_Info, on_delete=models.CASCADE)
@@ -69,12 +70,27 @@ class Riding_His_Info(models.Model):
     class Meta:
         ordering = ['id']
 
+    # def model(self):
+    #     return self.riding.user.carModel
+
+    # def mac(self):
+    #     return self.riding.user.mac
+
+    # def user(self):
+    #     return self.riding.user.user
+
+    # def startDate(self):
+    #     return self.riding.startDate
+
+    # def endDate(self):
+    #     return self.riding.endDate
+
     def __str__(self):
-        return '%d %s' % (self.id, self.riding.car.user.username)
+        return '%d %s' % (self.id, self.riding.user.user.username)
 
 class Car_Check(models.Model):
     car = models.OneToOneField(Car_User, on_delete=models.CASCADE)
-    type = models.CharField
+    type = models.CharField(max_length=50)
     date = models.DateTimeField()
     result = models.CharField(max_length=50)
 
@@ -86,7 +102,7 @@ class Car_Check(models.Model):
 
 class Startup_Img(models.Model):
     img = models.ImageField()
-    type = models.CharField(max_length=10)
+    type = models.CharField(max_length=10, default="supercar")
     date = models.DateField(auto_now=True)
     state = models.CharField(max_length=10)
 
@@ -99,7 +115,7 @@ class Startup_Img(models.Model):
 class Riding_Statistics(models.Model):
     car = models.OneToOneField(Car_User, on_delete=models.CASCADE)
     average_speed = models.IntegerField()
-    duration = models.DurationField()
+    duration = models.DurationField(help_text="Pleas enter valid format: [dd] [[hh:]mm:]ss")
     max_speed = models.CharField(max_length=50)
     date = models.DateTimeField()
 
@@ -116,7 +132,7 @@ class Sms_Codes(models.Model):
     status = models.IntegerField()
 
     def __str__(self):
-        return f'send {code} to {phone_number} at {send_date}'
+        return f'send {self.code} to {self.phone_number} at {self.send_date}'
 
 class System_Config(models.Model):
     name = models.CharField(max_length=64)
@@ -127,7 +143,7 @@ class System_Config(models.Model):
     status = models.BooleanField()
 
     def __str__(self):
-        return f'{name}:{value}'
+        return f'{self.name}:{self.value}'
 
 
 

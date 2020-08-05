@@ -1,5 +1,7 @@
 from django.contrib import admin
+from django.contrib.auth.models import User
 from .models import Car_User, Car_Model, Riding_Info, Riding_His_Info, Car_Check, Startup_Img, Riding_Statistics, Sms_Codes, System_Config
+
 
 class CarsInstanceInline(admin.TabularInline):
     model = Car_User

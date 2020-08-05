@@ -1,0 +1,23 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Model: {{ model.name }}</h1>
+
+  <p><strong>Code:</strong> {{ model.code }}</p> 
+  <p><strong>Image:</strong> <img src="{{ model.img.url }}" width="300" height="200"></p>
+
+  <div style="margin-left:20px;margin-top:20px">
+    <h4>Cars</h4>
+
+    {% for car in model.car_user_set.all %}
+      <hr>
+      <p class="{% if car.state == 1 %}text-success{% elif car.state == 2 %}text-danger{% else %}text-warning{% endif %}">
+        State: {{ car.state }}
+      </p>
+      {% if car.state != 1 %}
+        <p><strong>The car is not available:</strong> Please contact us to get more information.</p>
+      {% endif %}
+      <a class="text-muted"><strong>Id:</strong> <a href="">{{ car.id }}</a></p>
+    {% endfor %}
+  </div>
+{% endblock %}

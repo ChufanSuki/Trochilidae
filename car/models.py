@@ -16,6 +16,9 @@ class Car_Model(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('model-detail', args=[str(self.id)])
+
 class Car_User(models.Model):
     """Model representing the a instance of car model."""
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -30,9 +33,6 @@ class Car_User(models.Model):
 
     def __str__(self):
         return f'{self.user.username} ({self.carModel.name}) Mac ({self.mac})'
-    
-    # def get_absolute_url(self):
-    #     return reverse('car-user', args=[str(self.id)])
 
 class Riding_Info(models.Model):
     user = models.ForeignKey(Car_User, on_delete=models.CASCADE)

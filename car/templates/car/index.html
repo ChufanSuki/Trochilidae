@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Trochilidae Home</h1>
+  <p>Welcome to Trochilidae, a website powered by <em>Django</em>!</p>
+  <h2>Dynamic content</h2>
+  <p>The library has the following record counts:</p>
+  <ul>
+    <li><strong>Models:</strong> {{ num_models }}</li>
+    <li><strong>Cars:</strong> {{ num_cars }}</li>
+    <li><strong>Cars available:</strong> {{ num_cars_available }}</li>
+    <li><strong>Users:</strong> {{ num_users }}</li>
+    <li><strong>Ridings:</strong> {{ num_ridings }}</li>
+  </ul>
+  <p>You have visited this page {{ num_visits }}{% if num_visits == 1 %} time{% else %} times{% endif %}.</p>
+{% endblock %}

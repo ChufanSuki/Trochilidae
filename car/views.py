@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from car.models import Car_User, Car_Model, Riding_Info, Riding_His_Info, Car_Check, Startup_Img, Riding_Statistics, Sms_Codes, System_Config
 from django.views import generic
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+
 
 def index(request):
     # Number of visits to this view, as counted in the session variable.
@@ -36,7 +38,7 @@ class ModelListView(generic.ListView):
     # Then return the new (updated) context.
     template_name = 'car/model_list.html'
     context_object_name = 'model_list'
-    paginate_by = 2
+    paginate_by = 10
 
 class ModelDetailView(generic.DetailView):
     model = Car_Model
@@ -44,3 +46,22 @@ class ModelDetailView(generic.DetailView):
     template_name = 'car/model_detail.html'
 
 
+class UsedCarsByUserListView(LoginRequiredMixin, generic.ListView):
+    model = Car_User
+    context_object_name = 'car_list'
+    template_name = 'car/car_list_used_user.html'
+    paginate_by = 10
+    # you may use @property to decorate useful function
+
+    def get_queryset(self):
+        return Car_User.objects.filter(user=self.request.user).order_by('date')
+
+class UsedCarsAllListView(PermissionRequiredMixin, generic.ListView):
+    model = Car_User
+    context_object_name = 'car_list'
+    template_name = 'car/car_list_used_all.html'
+    paginate_by = 10
+    permission_required = 'car.can_change_state'
+    
+    def get_queryset(self):
+        return Car_User.objects.order_by('date')

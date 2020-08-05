@@ -1,0 +1,26 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Borrowed cars</h1>
+
+    {% if car_list %}
+    <ul>
+
+        {% for car in car_list %} 
+        <li class="text-info">
+            
+                <h3>You have
+                    {% if not perms.car.can_change_state %}
+                        <h1>NO</h1>
+                    {% endif %}
+                    permission to change state of car.</h3>
+            
+            <a href="{% url 'model-detail' car.carModel.pk %}">{{car.carModel.name}}</a> ({{ car.date }})        
+        </li>
+        {% endfor %}
+    </ul>
+
+    {% else %}
+      <p>There are no cars borrowed.</p>
+    {% endif %}       
+{% endblock %}

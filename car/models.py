@@ -30,6 +30,7 @@ class Car_User(models.Model):
 
     class Meta:
         ordering = ['date', 'id']
+        permissions = (("can_change_status", "Set car status"),)
 
     def __str__(self):
         return f'{self.user.username} ({self.carModel.name}) Mac ({self.mac})'

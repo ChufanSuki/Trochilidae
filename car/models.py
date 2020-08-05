@@ -29,10 +29,10 @@ class Car_User(models.Model):
         ordering = ['date', 'id']
 
     def __str__(self):
-        return f'{self.user.username}, Model ({self.carModel.name}), Mac code ({self.mac})'
+        return f'{self.user.username} ({self.carModel.name}) Mac ({self.mac})'
     
-    def get_absolute_url(self):
-        return reverse('car-user', args=[str(self.id)])
+    # def get_absolute_url(self):
+    #     return reverse('car-user', args=[str(self.id)])
 
 class Riding_Info(models.Model):
     user = models.ForeignKey(Car_User, on_delete=models.CASCADE)
@@ -70,20 +70,25 @@ class Riding_His_Info(models.Model):
     class Meta:
         ordering = ['id']
 
-    # def model(self):
-    #     return self.riding.user.carModel
+    def display_mac(self):
+        return self.riding.user.mac
+    
+    display_mac.short_description = 'Mac'
 
-    # def mac(self):
-    #     return self.riding.user.mac
+    def display_model(self):
+        return self.riding.user.carModel
+    
+    display_model.short_description = 'Model'
 
-    # def user(self):
-    #     return self.riding.user.user
+    def display_user(self):
+        return self.riding.user.user.username
+    
+    display_user.short_description = 'Username'
 
-    # def startDate(self):
-    #     return self.riding.startDate
-
-    # def endDate(self):
-    #     return self.riding.endDate
+    def display_date(self):
+        return f'{self.riding.startDate}~{self.riding.endDate}'
+    
+    display_date.short_description = 'Date'
 
     def __str__(self):
         return '%d %s' % (self.id, self.riding.user.user.username)

@@ -1,13 +1,29 @@
 from django.contrib import admin
 from .models import Car_User, Car_Model, Riding_Info, Riding_His_Info, Car_Check, Startup_Img, Riding_Statistics, Sms_Codes, System_Config
 
+class CarsInstanceInline(admin.TabularInline):
+    model = Car_User
+    extra = 0
+
 @admin.register(Car_User)
 class Car_UserAdmin(admin.ModelAdmin):
     list_display = ('user', 'carModel', 'date', 'mac', 'state')
+    list_filter = ('user', 'carModel', 'date', 'mac', 'state')
+
+    fieldsets = (
+        (None, {
+            'fields': ('user', )
+        }),
+        ('Car', {
+            'fields': ('carModel', 'mac', 'state')
+        }),
+    )
+
 
 @admin.register(Car_Model)
 class Car_ModelAdmin(admin.ModelAdmin):
     list_display = ('name', 'code', 'state', 'img')
+    inlines = [CarsInstanceInline]
 
 @admin.register(Riding_Info)
 class Riding_InfoAdmin(admin.ModelAdmin):
@@ -15,7 +31,7 @@ class Riding_InfoAdmin(admin.ModelAdmin):
 
 @admin.register(Riding_His_Info)
 class Riding_His_InfoAdmin(admin.ModelAdmin):
-    list_display = ('riding', )
+    list_display = ('display_user', 'display_mac', 'display_model', 'display_date')
 
 @admin.register(Car_Check)
 class Car_CheckAdmin(admin.ModelAdmin):
@@ -36,13 +52,3 @@ class Sms_CodesAdmin(admin.ModelAdmin):
 @admin.register(System_Config)
 class System_ConfigAdmin(admin.ModelAdmin):
     list_display = ('name', 'value', 'express', 'type', 'note', 'status')
-
-# admin.site.register(Car_User)
-# admin.site.register(Car_Model)
-# admin.site.register(Riding_Info)
-# admin.site.register(Riding_His_Info)
-# admin.site.register(Car_Check)
-# admin.site.register(Startup_Img)
-# admin.site.register(Riding_Statistics)
-# admin.site.register(Sms_Codes)
-# admin.site.register(System_Config)

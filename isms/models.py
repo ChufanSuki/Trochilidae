@@ -11,7 +11,11 @@ class Images_Info(models.Model):
     extension = models.CharField(max_length=16)
     detail = models.CharField(max_length=500)
     date = models.DateTimeField()
-    type = models.IntegerField()
+    class CreateType(models.IntegerChoices):
+        upload_by_web = 300
+        upload_by_app = 200
+    type = models.IntegerField(choices=CreateType.choices)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    
     def __str__(self):
         return f'uuid: {self.uuid}'

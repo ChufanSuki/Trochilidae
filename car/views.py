@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from car.models import Car_User, Car_Model, Riding_Info, Riding_His_Info, Car_Check, Startup_Img, Riding_Statistics, Sms_Codes, System_Config
+from car.models import Car_User, Car_Model, Car_Check
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 

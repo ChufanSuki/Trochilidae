@@ -1,13 +1,16 @@
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
-
+import uuid
 class Car_Model(models.Model):
     """Model representing a car."""
     name = models.CharField(max_length=200, help_text='Enter a car model name(e.g. Benz)')
     img = models.ImageField()
     code = models.CharField(max_length=50, blank=True)
     state = models.BooleanField(help_text='Enter 0 or 1.(1=normal,0=delete)')
+    slug = models.SlugField(unique=True)
+    # Used by the API to look up the record
+    uuid = models.UUIDField(primary_key=True, default=uuid.uuid4)
 
     class Meta:
         ordering = ['name']

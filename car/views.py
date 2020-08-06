@@ -2,7 +2,7 @@ from django.shortcuts import render
 from car.models import Car_User, Car_Model, Car_Check
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-
+from riding.models import Riding_Info
 
 def index(request):
     # Number of visits to this view, as counted in the session variable.

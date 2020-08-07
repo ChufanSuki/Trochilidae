@@ -2,6 +2,7 @@ from django.db import models
 from car.models import Car_Model, Car_User
 from core.models import TimeStampedModel
 import uuid
+
 class Riding_Info(TimeStampedModel):
     user = models.ForeignKey(Car_User, on_delete=models.CASCADE)
     startDate = models.DateTimeField(auto_now_add=True)
@@ -31,7 +32,7 @@ class Riding_Info(TimeStampedModel):
         ordering = ['startDate', 'endDate']
     
     def __str__(self):
-        return f'{self.id} {self.user.user.username} ({self.user.carModel}) Mac ({self.user.mac}) ({self.startDate}~{self.endDate})'
+        return f'{self.user.user.username} ({self.user.carModel}) Mac ({self.user.mac}) ({self.startDate}~{self.endDate})'
 
 class Riding_His_Info(TimeStampedModel):
     user = models.ForeignKey(Car_User, on_delete=models.CASCADE)
@@ -79,7 +80,7 @@ class Riding_His_Info(TimeStampedModel):
     display_date.short_description = 'Date'
 
     def __str__(self):
-        return '%d %s' % (self.id, self.user.user.username)
+        return '%s' % (self.user.user.username)
 
 class Riding_Statistics(TimeStampedModel):
     car = models.OneToOneField(Car_User, on_delete=models.CASCADE)

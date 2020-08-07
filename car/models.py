@@ -49,7 +49,7 @@ class Car_Check(TimeStampedModel):
     uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Left blank")
     
     def __str__(self):
-        return '%d %s' % (self.id, self.car.user.username)
+        return '%s' % (self.car.user.username)
 
 
 

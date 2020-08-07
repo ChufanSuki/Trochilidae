@@ -25,7 +25,7 @@ SECRET_KEY = 'du(!@yur%s#&a1s0m+i@$au!37^bq%-6p@+(8&_3xa8dnsjcy1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.124.37', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -39,7 +39,10 @@ INSTALLED_APPS = [
     'system',
     'core',
     'phonenumber_field',
+    'corsheaders',
+    'django_extensions',
     'rest_framework',
+    'django.contrib.admindocs',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -51,11 +54,13 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.admindocs.middleware.XViewMiddleware',
 ]
 
 ROOT_URLCONF = 'admin_site.urls'
@@ -270,6 +275,13 @@ JAZZMIN_SETTINGS = {
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAdminUser',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        # 'rest_framework.permissions.IsAuthenticated',
+        # 'rest_framework.authentication.BasicAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
     ),
 }
+
+# CORS_ORIGIN_WHITELIST = (
+
+# )

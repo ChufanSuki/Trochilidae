@@ -4,15 +4,21 @@ from phonenumber_field.modelfields import PhoneNumberField
 from core.models import TimeStampedModel
 import uuid
 class Startup_Img(TimeStampedModel):
+    """
+    Stores a startup image.
+    """
     img = models.ImageField()
     type = models.CharField(max_length=10, default="supercar")
     state = models.CharField(max_length=10)
     uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Left blank")
     
     def __str__(self):
-        return f'{self.id}'
+        return f'{self.uuid}'
 
 class Sms_Codes(TimeStampedModel):
+    """
+    Stores sms codes sent to the user.
+    """
     phone_number = PhoneNumberField(primary_key=True)
     code = models.CharField(max_length=10)
     send_date = models.DateTimeField(auto_now=True)

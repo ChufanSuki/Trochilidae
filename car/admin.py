@@ -18,7 +18,7 @@ class Car_UserAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('user', 'created', 'modified')
+            'fields': ('user',)
         }),
         ('Car', {
             'fields': ('carModel', 'mac', 'state')

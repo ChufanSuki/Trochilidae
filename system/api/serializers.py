@@ -1,19 +1,20 @@
 from rest_framework import serializers
-from ..models import Car_Model, Car_Check, Car_User
-class ModelSerializer(serializers.ModelSerializer):
+from ..models import Startup_Img, Sms_Codes, System_Config
+
+class StartImgSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Car_Model
+        model = Startup_Img
         fields = '__all__'
         read_only_fields = ['uuid', 'created', 'modified']
 
-class CheckSerializer(serializers.ModelSerializer):
+class SmsSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Car_Check
+        model = Sms_Codes
         fields = '__all__'
         read_only_fields = ['uuid', 'created', 'modified']
-    
-class CustomerSerializer(serializers.ModelSerializer):
+
+class ConfigSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Car_User
+        model = System_Config
         fields = '__all__'
         read_only_fields = ['uuid', 'created', 'modified']

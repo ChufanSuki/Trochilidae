@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'user_profile',
     'riding',
     'system',
+    'core',
     'phonenumber_field',
     'rest_framework',
     'django.contrib.admin',
@@ -85,14 +86,14 @@ WSGI_APPLICATION = 'admin_site.wsgi.application'
 
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.postgresql',
-        # 'NAME': 'mydatabase',
-        # 'USER': 'mydatabaseuser',
-        # 'PASSWORD': 'mypassword',
-        # 'HOST': '127.0.0.1',
-        # 'PORT': '5432',
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'trochilidae',
+        'USER': 'allen',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '',
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 

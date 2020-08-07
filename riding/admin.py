@@ -11,4 +11,4 @@ class Riding_His_InfoAdmin(admin.ModelAdmin):
 
 @admin.register(Riding_Statistics)
 class Riding_StatisticsAdmin(admin.ModelAdmin):
-    list_display = ('car', 'duration', 'date', 'max_speed', 'average_speed')
+    list_display = ('car', 'duration', 'date', 'max_speed', 'average_speed', 'created', 'modified')

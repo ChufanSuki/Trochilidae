@@ -11,22 +11,22 @@ cookiecutter==1.7.2
 cryptography==2.9.2
 Django==3.0.3
 django-cors-headers==3.4.0
-django-filter @ file:///home/conda/feedstock_root/build_artifacts/django-filter_1591380509061/work
+django-filter # @ file:///home/conda/feedstock_root/build_artifacts/django-filter_1591380509061/work
 django-ipware==3.0.0
 django-jazzmin==2.2.5
 django-phonenumber-field==4.0.0
 django-rest-knox==4.1.0
 djangorestframework==3.11.0
 idna==2.10
-importlib-metadata @ file:///Users/runner/miniforge3/conda-bld/importlib-metadata_1593211382425/work
+importlib-metadata # @ file:///Users/runner/miniforge3/conda-bld/importlib-metadata_1593211382425/work
 Jinja2==2.11.2
 jinja2-time==0.2.0
-Markdown @ file:///home/conda/feedstock_root/build_artifacts/markdown_1589366472132/work
+Markdown # @ file:///home/conda/feedstock_root/build_artifacts/markdown_1589366472132/work
 markdown2==2.3.9
 MarkupSafe==1.1.1
 olefile==0.46
 phonenumbers==8.12.7
-Pillow @ file:///Users/runner/miniforge3/conda-bld/pillow_1593693221521/work
+Pillow # @ file:///Users/runner/miniforge3/conda-bld/pillow_1593693221521/work
 poyo==0.5.0
 psycopg2==2.8.5
 pycparser==2.20

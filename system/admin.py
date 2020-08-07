@@ -3,7 +3,7 @@ from .models import Startup_Img, Sms_Codes, System_Config
 
 @admin.register(Startup_Img)
 class Startup_ImgAdmin(admin.ModelAdmin):
-    list_display = ('img', 'type', 'date', 'state')
+    list_display = ('img', 'type', 'created', 'state')
 
 @admin.register(Sms_Codes)
 class Sms_CodesAdmin(admin.ModelAdmin):

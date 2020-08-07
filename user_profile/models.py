@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from phonenumber_field.modelfields import PhoneNumberField
-
+import uuid
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(default='default.png', upload_to='profile_pics', help_text="avatar")
@@ -11,8 +11,11 @@ class Profile(models.Model):
         sercet = -1
     sex = models.IntegerField(choices=SexType.choices)
     lastIp = models.GenericIPAddressField(verbose_name="Last Login IP")
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
+    uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Left blank")
 
-    class Meta:
+    class Meta():
         abstract = True
 
     def __str__(self):
@@ -30,8 +33,6 @@ class UserProfile(Profile):
     points = models.IntegerField(default=0)
     question = models.CharField(max_length=50, blank=True, help_text="Security Question.e.g. Where were I born?", verbose_name="Security Question")
     answer = models.CharField(max_length=50, blank=True, help_text="Answer to Security Question.")
-
-
 
 
 

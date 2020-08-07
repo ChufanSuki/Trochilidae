@@ -13,25 +13,30 @@ class CarsInstanceInline(admin.TabularInline):
 
 @admin.register(Car_User)
 class Car_UserAdmin(admin.ModelAdmin):
-    list_display = ('user', 'carModel', 'date', 'mac', 'state')
-    list_filter = ('user', 'carModel', 'date', 'mac', 'state')
+    list_display = ('user', 'carModel', 'created', 'modified', 'mac', 'state', 'uuid')
+    list_filter = ('user', 'carModel', 'created', 'modified', 'mac', 'state', 'uuid')
 
     fieldsets = (
         (None, {
-            'fields': ('user', )
+            'fields': ('user', 'created', 'modified')
         }),
         ('Car', {
             'fields': ('carModel', 'mac', 'state')
         }),
     )
 
+    exclude = ('created', 'modified', 'uuid')
+
+
 
 @admin.register(Car_Model)
 class Car_ModelAdmin(admin.ModelAdmin):
-    list_display = ('name', 'code', 'state', 'img')
+    list_display = ('name', 'code', 'state', 'img', 'created', 'modified', 'uuid')
     inlines = [CarsInstanceInline]
+    exclude = ('created', 'modified', 'uuid')
 
 @admin.register(Car_Check)
 class Car_CheckAdmin(admin.ModelAdmin):
-    list_display = ('car', 'type', 'date', 'result')
+    list_display = ('car', 'type', 'created', 'modified', 'result', 'uuid')
+    exclude = ('created', 'modified', 'uuid')
 
